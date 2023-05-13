@@ -2,8 +2,9 @@ import random
 import asyncio
 
 async def send_data():
+    loop = asyncio.get_running_loop()
     # creates a UDP Datagram with only the transport as an output
-    transport, _ = await asyncio.create_datagram_endpoint(
+    transport, _ = await loop.create_datagram_endpoint(
         # disregards the protocol
         lambda: None,
         # sets the transport and writes it in the RAM
@@ -18,7 +19,8 @@ async def send_data():
         await asyncio.sleep(1)
 
 async def recieve_data():
-    transport, _ = await asyncio.create.datagram_endpoint(
+    loop = asyncio.get_running_loop()
+    transport, _ = await loop.create_datagram_endpoint(
         # creates a protocol with help of the DatagramProtocol Class
         asyncio.DatagramProtocol,
         # recieves data via the 11235 socket
